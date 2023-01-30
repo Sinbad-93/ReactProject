@@ -1,9 +1,12 @@
 import style from "./style.module.css"
 
-export function DisplayDifficulty(){
+export function DisplayDifficulty(props){
     return <div className={`box ${style.darkBorder}
     ${style.flex}
     `}> 
-    No difficulty set
+     {props.difficulty != "" ? 
+     "Difficulty set to "+ props.difficulty
+     : 
+     "No difficutly set" }
 </div>;
 }
