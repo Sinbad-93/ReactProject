@@ -3,30 +3,32 @@ import style from "./style.module.css"
 import { useState } from "react";
 
 export function MenuList(props){
-    
-    const [picked, setPicked] = useState(0);
 
-    function changePicked(id){
-        setPicked(id)
+    const levels = ["Low","Medium","Hard","Insane"];
+    
+    const [picked, setPicked] = useState("");
+
+    function changePicked(difficulty){
+        setPicked(difficulty)
     }
 
-    function colorPickedRow(id,str){
-        const oldElement = document.getElementById(picked);
-        oldElement.style.backgroundColor = "rgb(242, 237, 237)";
-
-        const element = document.getElementById(id);
-        element.style.backgroundColor = "lightblue";
-
-        changePicked(id);
-
-        props.dealTheDifficulty(str);
-
-        //alert(str);
-
+    function pickDifficulty(difficulty){
+        changePicked(difficulty);
+        props.dealTheDifficulty(difficulty);
     }
 
     return <div className={`box ${style.flexbox}`}> 
-        <MenuListItem colorPickedRow={colorPickedRow}></MenuListItem>
+    <ul>
+    {levels.map((diff) => (
+    <MenuListItem 
+      difficulty={diff}
+      picked = {picked}
+      pickDifficulty = {pickDifficulty}
+      isSelected={picked === diff}
+      >
+        </MenuListItem>
+    ))}
+    </ul>
     </div>
     ;
 }

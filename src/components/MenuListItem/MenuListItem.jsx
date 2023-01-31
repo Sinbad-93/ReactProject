@@ -1,20 +1,24 @@
+import { useState } from "react";
+
 export function MenuListItem(props){
-    const levels = ["Low","Medium","Hard","Insane"];
 
-    function pickDifficulty(e){
-        //alert('ok');
-        //console.log(e.id);
-        //alert(e.id);
-        const index = e.id;
-        const difficulty = levels[index];
-        props.colorPickedRow(index,difficulty);
+    const [isHovered, setIsHovered] = useState(false);
+
+    function backgroundPainting(){
+        if(props.isSelected){
+            return "lightblue"
+        }
+        else if(isHovered) {
+            return "aqua"
+        }
+        else {
+            return "rgb(242, 237, 237)"
+        }
     }
-
-    return <ul> 
-       {levels.map((value, index) => {
-      return <li id={index} onClick={e => pickDifficulty(e.target)}
-      key={index}>Set to : {value}</li>
-    })}
-    </ul>
+      return <li 
+      onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} 
+      style={{backgroundColor : backgroundPainting()}}
+      onClick={() => props.pickDifficulty(props.difficulty)}
+      >Set to : {props.difficulty}</li>
     ;
 }
