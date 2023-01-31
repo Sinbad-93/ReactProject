@@ -19,13 +19,13 @@ export function MenuList(props){
 
     return <div className={`box ${style.flexbox}`}> 
     <ul>
-    {levels.map((diff) => (
+    {levels.map((diff,index) => (
     <MenuListItem 
       difficulty={diff}
       picked = {picked}
       pickDifficulty = {pickDifficulty}
       isSelected={picked === diff}
-      >
+      key={index}>
         </MenuListItem>
     ))}
     </ul>
